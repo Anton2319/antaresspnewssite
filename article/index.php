@@ -56,11 +56,28 @@ $article = getfromdb($id);
 				<div class="container">
 					<div class="row">
 						<div class="col-8">
-							<img src="test.jpg" class="d-inline-block align-top article-img" width="100%">
-							<h2 class="article-heading"><?php echo($article['Header']); ?></h2>
+							<img src=<?php
+							if(file_exists("../media/article".$article['id']."-full.jpg")==false) {
+							    echo("../noimage.jpg");
+							}
+							else {
+							    echo("../media/article".$article['id']."-full.jpg");
+							}
+							?> class="d-inline-block align-top article-img" width="100%">
+							<h2 class="article-heading"><?php
+              echo($article['Header']);
+              if($article['Header']==null) {
+                echo("<b>Статья не найдена!</b>");
+              }
+              ?></h2>
 							<p class="article-author">Автор: <b><?php echo($article['Author']); ?></b></p>
 							<p class="article-text">
-							    <?php echo($article['Text']); ?>
+							    <?php
+                  echo($article['Text']);
+                  if($article['Text']==null) {
+                    echo("<b>Статья не найдена! Возможно, ссылка по которой вы оказались здесь неверная или устаревшая.</b>");
+                  }
+                  ?>
 							</p>
 						</div>
 						<div class="col-4">
@@ -86,12 +103,8 @@ $article = getfromdb($id);
 				<div class="col-8">
 					<br>
 	        <p style="color: white;">© Antares Space News 2019. Вся информация размещённая здесь взята из открытых источников.
-					Копирование материалов разрешено с указанием ссылки на него. Обратная связь: anton_2319@outlook.com
+					Копирование материалов разрешено с указанием ссылки на него. Обратная связь: anton_2319@outlook.com <a href="LICENSE">Лицензия</a>
 					</p>
 				</div>
         </div>
       </div>
-			</div>
-	</footer>
-</body>
-</html>

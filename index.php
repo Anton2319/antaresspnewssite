@@ -39,6 +39,11 @@ $article3 = getfromdb($db, $dblenght - 3);
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script>
+	    $('#modal').on('shown.bs.modal', function () {
+          $('#myInput').trigger('focus')
+        })
+	</script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -58,7 +63,7 @@ $article3 = getfromdb($db, $dblenght - 3);
 			<img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
 			<b>Antares Space News</b>
 		</a>
-		<div class="navbar navbar-expand-lg " id="navbarNav">
+		<div class="navbar" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
 					<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
@@ -71,6 +76,40 @@ $article3 = getfromdb($db, $dblenght - 3);
 				</li>
 			</ul>
 		</div>
+		<div class="navbar flex-row ml-md-auto d-none d-md-flex" id="navbarSupportedContent">
+		</div>
+		<form action="auth.php" class="form-inline my-2 my-lg-0">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+              Авторизация
+            </button>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Авторизация</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="auth.php" method="get">
+                    <div class="form-group">
+                        <input name="Username" type="Username" class="form-control" id="inputLogin" placeholder="Логин">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input name="Password" type="Username" class="form-control" id="inputPassword" placeholder="Пароль">
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <input type="submit" class="btn btn-primary" value="Авторизация">
+                </form>
+              </div>
+            </div>
+          </div>
 	</nav>
 	<!-- РАЗДЕЛ СТАТЕЙ -->
 	<div class="container">
@@ -79,7 +118,14 @@ $article3 = getfromdb($db, $dblenght - 3);
 				<div class="container">
 					<div class="row">
 						<div class="col-4">
-							<img src="test.jpg" width="100%" class="d-inline-block align-top article-main-img" alt="">
+							<img src=<?php
+							if(file_exists("media/article".$mainarticle['id'].".jpg")==false) {
+							    echo("noimage.jpg");
+							}
+							else {
+							    echo("media/article".$mainarticle['id'].".jpg");
+							}
+							?> width="100%" class="d-inline-block align-top article-main-img" alt="">
 						</div>
 						<div class="col-8">
 							<h2 class="article-main-heading">
@@ -92,7 +138,7 @@ $article3 = getfromdb($db, $dblenght - 3);
 							      echo($mainarticle['Introtext']);
 							    ?>
 							</p>
-							<a class="btn btn-primary article-main-btn" href=<?php echo("/article?id=1"); ?>>Читать далее</a>
+							<a class="btn btn-primary article-main-btn" href=<?php echo("article/?id=".$dblenght); ?>>Читать далее</a>
 						</div>
 					</div>
 				</div>
@@ -101,7 +147,14 @@ $article3 = getfromdb($db, $dblenght - 3);
 		<div class="row">
 			<div class="col-4">
 				<div class="article-1">
-					<img src="test.jpg" width="100%" class="d-inline-block align-top article-img" alt="">
+					<img src=<?php
+							if(file_exists("media/article".$article1['id'].".jpg")==false) {
+							    echo("noimage.jpg");
+							}
+							else {
+							    echo("media/article".$article1['id'].".jpg");
+							}
+							?> width="100%" class="d-inline-block align-top article-img" alt="">
 					<h2 class="article-heading">
 					<?php echo($article1['Header']);
 					if($article1['Header'] == null) {
@@ -121,7 +174,14 @@ $article3 = getfromdb($db, $dblenght - 3);
 			</div>
 			<div class="col-4">
 				<div class="article-2">
-					<img src="test.jpg" width="100%" class="d-inline-block align-top article-img" alt="">
+					<img src=<?php
+							if(file_exists("media/article".$article2['id'].".jpg")==false) {
+							    echo("noimage.jpg");
+							}
+							else {
+							    echo("media/article".$article2['id'].".jpg");
+							}
+							?> width="100%" class="d-inline-block align-top article-img" alt="">
 					<h2 class="article-heading">
 					<?php echo($article2['Header']);
 					if($article2['Header'] == null) {
@@ -141,7 +201,14 @@ $article3 = getfromdb($db, $dblenght - 3);
 			</div>
 			<div class="col-4">
 				<div class="article-3">
-					<img src="test.jpg" width="100%" class="d-inline-block align-top article-img" alt="">
+					<img src=<?php
+							if(file_exists("media/article".$article3['id'].".jpg")==false) {
+							    echo("noimage.jpg");
+							}
+							else {
+							    echo("media/article".$article3['id'].'.jpg');
+							}
+							?> width="100%" class="d-inline-block align-top article-img" alt="">
 					<h2 class="article-heading">
 					<?php echo($article3['Header']);
 					if($article3['Header'] == null) {
