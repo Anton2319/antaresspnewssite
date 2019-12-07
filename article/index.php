@@ -1,13 +1,19 @@
 <?php
+$db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+if(!$db) {
+    $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    if(!$db) {
+        $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    }
+}
 $id = $_GET['id'];
 $id = htmlspecialchars($id);
-function getfromdb($id) {
-    $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+function getfromdb($id, $db) {
     $responce = mysqli_query($db, "SELECT * FROM `articles` WHERE id = ".$id);
     $result = mysqli_fetch_assoc($responce);
     return $result;
 }
-$article = getfromdb($id);
+$article = getfromdb($id, $db);
 ?>
 <!DOCTYPE html>
 <html lang="ru">

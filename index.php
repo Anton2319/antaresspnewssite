@@ -1,5 +1,12 @@
 <?php
+session_start();
 $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+if(!$db) {
+    $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    if(!$db) {
+        $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    }
+}
 function countdb($db) {
     $responce = mysqli_query($db, "SELECT COUNT(1) FROM `articles`");
     $result = mysqli_fetch_array($responce);
@@ -15,6 +22,7 @@ $mainarticle = getfromdb($db, $dblenght);
 $article1 = getfromdb($db, $dblenght - 1);
 $article2 = getfromdb($db, $dblenght - 2);
 $article3 = getfromdb($db, $dblenght - 3);
+$username = $_SESSION['Username'];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -34,6 +42,7 @@ $article3 = getfromdb($db, $dblenght - 3);
             webvisor:true
        });
     </script>
+    
     <noscript><div><img src="https://mc.yandex.ru/watch/56374378" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -74,15 +83,30 @@ $article3 = getfromdb($db, $dblenght - 3);
 				<li class="nav-item">
 					<a class="nav-link" href="#">Форум</a>
 				</li>
+				<?php
+				if($username=="Admin") {
+				    echo('<li class="nav-item">
+					<a class="nav-link" href="/admin">Панель управления</a>
+				</li>');
+				}
+				?>
 			</ul>
 		</div>
 		<div class="navbar flex-row ml-md-auto d-none d-md-flex" id="navbarSupportedContent">
 		</div>
 		<form action="auth.php" class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-              Авторизация
-            </button>
-    
+		    <?php
+		    if($username==null) {
+                echo('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Авторизация
+                </button>');
+		    }
+		    else {
+		        echo('<a href="exit.php" class="btn btn-primary">
+                  Выход
+                </a>');
+		    }
+            ?>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -169,7 +193,7 @@ $article3 = getfromdb($db, $dblenght - 3);
 					}
 					?>
 					</p>
-					<a class="btn btn-primary article-btn" href="/">Читать далее</a>
+					<a class="btn btn-primary article-btn" href=<?php echo("article/?id=".$article1['id']);?>>Читать далее</a>
 				</div>
 			</div>
 			<div class="col-4">
@@ -196,7 +220,7 @@ $article3 = getfromdb($db, $dblenght - 3);
 					}
 					?>
 					</p>
-					<a class="btn btn-primary article-btn" href="/">Читать далее</a>
+					<a class="btn btn-primary article-btn" href=<?php echo("article/?id=".$article2['id']);?>>Читать далее</a>
 				</div>
 			</div>
 			<div class="col-4">
@@ -223,7 +247,7 @@ $article3 = getfromdb($db, $dblenght - 3);
 					}
 					?>
 					</p>
-					<a class="btn btn-primary article-btn" href="/">Читать далее</a>
+					<a class="btn btn-primary article-btn" href=<?php echo("article/?id=".$article3['id']);?>>Читать далее</a>
 				</div>
 			</div>
 		</div>

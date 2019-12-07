@@ -37,13 +37,17 @@
 			<div class="article-pub">
 				<h3 class="article-pub-header">Публикация статьи</h3>
 				<form class="article-pub-form form-group" action="publish.php">
-					<input type="text" class="article-input" placeholder="Заголовок статьи" autocomplete="off">
+					<input name = "header" type="text" class="article-input" placeholder="Заголовок статьи" autocomplete="off">
 					<br>
 					<br>
-					<input type="text" class="article-input" placeholder="Авторство" autocomplete="off">
+					<input name = "author" type="text" class="article-input" placeholder="Авторство" autocomplete="off">
 					<br>
 					<br>
-					<textarea class="article-textarea" placeholder="Текст статьи">
+					<textarea name = "introtext" class="article-textarea" placeholder="Краткий текст статьи">
+					</textarea>
+					<br>
+					<br>
+					<textarea name = "text" class="article-textarea" placeholder="Полный текст статьи">
 					</textarea>
 					<br>
 					<br>

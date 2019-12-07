@@ -1,5 +1,11 @@
 <?php
 $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+if(!$db) {
+    $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    if(!$db) {
+        $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
+    }
+}
 function countdb($db) {
     $responce = mysqli_query($db, "SELECT COUNT(1) FROM `articles`");
     $result = mysqli_fetch_array($responce);
