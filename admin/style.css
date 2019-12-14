@@ -1,8 +1,12 @@
 .article-pub {
 	margin-top: 2em;
+	margin-bottom: 2em;
 	background-color: rgba(0, 0, 0, 0.9);
 	height: 100%;
 	width: 100%;
+}
+.article-pub > form {
+	margin-bottom: 0.5em;
 }
 .article-pub-form > textarea{
 	width: 50%;
@@ -39,22 +43,39 @@
 	margin-left: 0.5em;
 	margin-bottom: 0.5em;
 }
-.article-heading {
-	margin-top: 0.1em;
-	margin-left: 0.2em;
-}
-.article-1 {
-	color: white;
+.article-edit {
+	margin-top: 2em;
 	background-color: rgba(0, 0, 0, 0.9);
-	margin-top: 6em;
+	display: inline-block;
+	height: 100%;
+	width: 100%;
 }
-.article-2 {
-	color: white;
-	background-color: rgba(0, 0, 0, 0.9);
-	margin-top: 6em;
+.article-edit > form{
+	display: inline-block;
 }
-.article-3 {
+.article-edit-header {
+	margin-top: 0.5em;
+	margin-left: 0.9em;
+	//display: inline-block;
 	color: white;
-	background-color: rgba(0, 0, 0, 0.9);
-	margin-top: 6em;
+}
+.article-header {
+	margin-top: 0.5em;
+	margin-left: 1.3em;
+	//display: inline-block;
+	color: white;
+}
+.article-edit-btn {
+	margin-top: 0.5em;
+	margin-left: 0.5em;
+	margin-bottom: 0.5em;
+	display: inline-block;
+	color: white;
+}
+.article-remove-btn {
+	margin-top: 0.5em;
+	margin-left: 1.5em;
+	margin-bottom: 0.5em;
+	display: inline-block;
+	color: white;
 }

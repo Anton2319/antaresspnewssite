@@ -52,3 +52,30 @@
 	margin-left: 0.1em;
 	color: white;
 }
+.comments {
+	margin-top: 2em;
+	background-color: rgba(0, 0, 0, 0.9);
+	height: 100%;
+	width: 100%;
+}
+.comments-header {
+	margin-top: 0.5em;
+	margin-left: 0.1em;
+}
+.comment-text {
+    width: 50%;
+    background-color: inherit;
+    color: white;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 0.4em;
+    font-size: 18px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.comments-submit {
+	margin-top: 0.5em;
+	margin-left: 0em;
+	margin-bottom: 0.5em;
+}

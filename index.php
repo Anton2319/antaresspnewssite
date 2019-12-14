@@ -23,6 +23,7 @@ $article1 = getfromdb($db, $dblenght - 1);
 $article2 = getfromdb($db, $dblenght - 2);
 $article3 = getfromdb($db, $dblenght - 3);
 $username = $_SESSION['Username'];
+$type = $_SESSION['Type'];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -84,7 +85,7 @@ $username = $_SESSION['Username'];
 					<a class="nav-link" href="#">Форум</a>
 				</li>
 				<?php
-				if($username=="Admin") {
+				if($type=="admin") {
 				    echo('<li class="nav-item">
 					<a class="nav-link" href="/admin">Панель управления</a>
 				</li>');
@@ -120,11 +121,11 @@ $username = $_SESSION['Username'];
               <div class="modal-body">
                 <form action="auth.php" method="get">
                     <div class="form-group">
-                        <input name="Username" type="Username" class="form-control" id="inputLogin" placeholder="Логин">
+                        <input name="Username" type="username" class="form-control" id="inputLogin" placeholder="Логин">
                     </div>
                     <br>
                     <div class="form-group">
-                        <input name="Password" type="Username" class="form-control" id="inputPassword" placeholder="Пароль">
+                        <input name="Password" type="password" class="form-control" id="inputPassword" placeholder="Пароль">
                     </div>
               </div>
               <div class="modal-footer">

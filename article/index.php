@@ -13,12 +13,28 @@ function getfromdb($id, $db) {
     $result = mysqli_fetch_assoc($responce);
     return $result;
 }
+function getcomments($db, $id) {
+    $responce = mysqli_query($db, "SELECT * FROM `comments` WHERE Articleid = ".$id);
+    return $responce;
+}
 $article = getfromdb($id, $db);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <title>Antares Space News</title>
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+       ym(56374378, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -70,20 +86,23 @@ $article = getfromdb($id, $db);
 							    echo("../media/article".$article['id']."-full.jpg");
 							}
 							?> class="d-inline-block align-top article-img" width="100%">
-							<h2 class="article-heading"><?php
-              echo($article['Header']);
-              if($article['Header']==null) {
-                echo("<b>Статья не найдена!</b>");
-              }
-              ?></h2>
+							<h2 class="article-heading">
+							    <?php
+                                echo($article['Header']);
+                                if($article['Header']==null) {
+                                    echo("<b>Статья не найдена!</b>");
+                                }
+                                ?>
+                                </h2>
 							<p class="article-author">Автор: <b><?php echo($article['Author']); ?></b></p>
 							<p class="article-text">
 							    <?php
-                  echo($article['Text']);
-                  if($article['Text']==null) {
-                    echo("<b>Статья не найдена! Возможно, ссылка по которой вы оказались здесь неверная или устаревшая.</b>");
-                  }
-                  ?>
+							    $article = str_ireplace("\n", "<br>", $article['Text']);
+                                echo($article);
+                                if($article['Text']==null) {
+                                echo("<b>Статья не найдена! Возможно, ссылка по которой вы оказались здесь неверная или устаревшая.</b>");
+                                }
+                                ?>
 							</p>
 						</div>
 						<div class="col-4">
@@ -91,6 +110,33 @@ $article = getfromdb($id, $db);
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="comments">
+			    <div class="container">
+    			    <div class="row">
+    			        <div class="col">
+    			            <h3 class="text-light comments-header">Комментарии:</h3>
+    			            <h5 class="text-light comments-header"><b>Напишите комментарий:</b></h5>
+    			            <form class="comments-form" action="writecomment.php">
+    			                <input type="hidden" name="articleid" value=<?php echo($id); ?>>
+    			                <textarea name="text" class="comment-text"></textarea><br>
+    			                <input type="submit" value="Отправить" class="btn btn-primary comments-submit">
+    			            </form>
+    			            <br>
+    			            <div class="comments-body">
+    			                <div class="comment">
+            			            <?php
+                                    $row = getcomments($db, $id);        			            
+                                    while ($row = mysqli_fetch_row($row)) {
+                                        echo("<h6 class='comment-title text-white'><b>".$row['0']."</b></h6>");
+                                        echo($row['1']);
+                                    }
+            			            ?>
+        			            </div>
+    			            </div>
+    			        </div>
+    			    </div>
+			    </div>
 			</div>
 		</div>
 	</div>

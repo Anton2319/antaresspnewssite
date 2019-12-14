@@ -11,6 +11,7 @@ if(!$db) {
         $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
     }
 }
+$id = $_POST['id'];
 function getfromdb($id, $db) {
     $responce = mysqli_query($db, "SELECT * FROM `articles` WHERE id = ".$id);
     $result = mysqli_fetch_assoc($responce);
@@ -59,41 +60,31 @@ function countdb($db) {
 	<div class="container">
 		<div class="row">
 			<div class="article-pub">
-				<h3 class="article-pub-header">Публикация статьи</h3>
-				<form class="article-pub-form form-group" method="post" action="publish.php">
-					<input name = "header" type="text" class="article-input" placeholder="Заголовок статьи" autocomplete="off">
+				<h3 class="article-pub-header">Редактирование статьи</h3>
+				<form class="article-pub-form form-group" method="post" action="update.php">
+					<input name = "header" type="text" class="article-input" placeholder="Заголовок статьи" value="<?php echo(htmlspecialchars(getfromdb($id, $db)['Header'])); ?>" autocomplete="off">
 					<br>
 					<br>
-					<input name = "author" type="text" class="article-input" placeholder="Авторство" autocomplete="off">
+					<input name = "author" type="text" class="article-input" placeholder="Авторство" value="<?php echo(getfromdb($id, $db)['Author']); ?>" autocomplete="off">
 					<br>
 					<br>
 					<textarea name = "introtext" class="article-textarea" placeholder="Краткий текст статьи">
+					    <?php echo(getfromdb($id, $db)['Introtext']); ?>
 					</textarea>
 					<br>
 					<br>
 					<textarea name = "text" class="article-textarea" placeholder="Полный текст статьи">
+					    <?php echo(getfromdb($id, $db)['Text']); ?>
 					</textarea>
 					<br>
 					<br>
-					<input style = "position: relative; left: 5%;" type="submit" value="Опубликовать" class="btn btn-primary">
+					<input type="hidden" name="id" value="<?php echo($id); ?>">
+					<input style = "position: relative; left: 5%;" type="submit" value="Редактировать" class="btn btn-primary">
+				</form>
+				<form action="//antaresnews.tk/admin">
+				    <input style = "position: relative; left: 5%;" type="submit" value="Отмена" class="btn btn-secondary">
 				</form>
 			</div>
-			<div class="article-edit">
-			    <h3 class="article-edit-header">Управление статьями</h3>
-			    <?php
-			    $i = countdb($db);
-			    while($i > 0) {
-			        echo("<h4 class='text-white article-header'>".getfromdb($i, $db)['Header']."</h4>");
-			        echo("<form method='post' action='delete.php'><input type='hidden' name='id' value='".getfromdb($i, $db)['id']."'><input type='submit' value='Удалить' class='article-remove-btn btn btn-danger'></form>");
-			        echo("<form method='post' action='edit.php'><input type='hidden' name='id' value='".getfromdb($i, $db)['id']."'><input type='submit' value='Изменить' class='article-edit-btn btn btn-primary'></form>");
-			        $i--;
-			    }
-			    ?>
-			</div>
 		</div>
-	</div>
-	<br>
-	<br>
-	<br>
-</body>
+	</body>
 </html>

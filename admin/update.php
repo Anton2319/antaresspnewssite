@@ -1,13 +1,19 @@
 <?php
 session_start();
-if($_SESSION['Type']!="admin") {
-    echo("<img src='accessdenited.jpg' height='100%'/>");
+if(isset($_SESSION['Type'])) {
+    if($_SESSION['Type']!="admin") {
+        echo("<img src='accessdenited.jpg' height='100%'/>");
+        exit(0);
+    }
+}
+else {
     exit(0);
 }
 $header = $_POST['header'];
 $introtext = $_POST['introtext'];
 $text = $_POST['text'];
 $author = $_POST['author'];
+$id = $_POST['id'];
 $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
 if(!$db) {
     $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
@@ -25,11 +31,12 @@ function getfromdb($db, $id) {
     $result = mysqli_fetch_assoc($responce);
     return $result;
 }
-function publish($header, $introtext, $text, $author, $db) {
-    $id = countdb($db) + 1;
-    $responce = mysqli_query($db, "INSERT INTO `articles`(`Header`, `Introtext`, `Text`, `Author`, `id`) VALUES ('".$header."','".$introtext."','".$text."','".$author."',".$id.")");
-    
+function publish($header, $introtext, $text, $author, $id, $db) {
+    $responce = mysqli_query($db, "UPDATE `articles` SET `Header` = '".$header."' WHERE `articles`.`id` = ".$id);
+    $responce = mysqli_query($db, "UPDATE `articles` SET `Introtext` = '".$introtext."' WHERE `articles`.`id` = ".$id);
+    $responce = mysqli_query($db, "UPDATE `articles` SET `Text` = '".$text."' WHERE `articles`.`id` = ".$id);
+    $responce = mysqli_query($db, "UPDATE `articles` SET `Author` = '".$author."' WHERE `articles`.`id` = ".$id);
 }
-publish($header, $introtext, $text, $author, $db);
+publish($header, $introtext, $text, $author, $id, $db);
 header("Location http://antaresnews.tk/admin");
 ?>

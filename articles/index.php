@@ -1,4 +1,6 @@
 <?php
+//номер страницы
+
 $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
 if(!$db) {
     $db = mysqli_connect("localhost", "id11638235_admin", "open2319", "id11638235_maindb");
@@ -16,10 +18,22 @@ function getfromdb($db, $id) {
     $result = mysqli_fetch_assoc($responce);
     return $result;
 }
+$page = $_GET['page'];
+if($page==null||$page<=0) {
+    $page = round(countdb($db) / 2);
+    //приведение типов
+    $page = (int) $page;
+}
 $dblenght = countdb($db);
-$article1 = getfromdb($db, $dblenght);
-$article2 = getfromdb($db, $dblenght - 1);
-$article3 = getfromdb($db, $dblenght - 2);
+if(countdb($db) % 2 == 0) {
+    $article1 = getfromdb($db, $page * 2);
+    $article2 = getfromdb($db, $page * 2 - 1);
+}
+else {
+    $article1 = getfromdb($db, $page * 2 - 1);
+    $article2 = getfromdb($db, $page * 2 - 2);  
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,6 +42,18 @@ $article3 = getfromdb($db, $dblenght - 2);
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+       ym(56374378, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -68,7 +94,14 @@ $article3 = getfromdb($db, $dblenght - 2);
 				<div class="container">
 					<div class="row">
 						<div class="col-4">
-							<img src="test.jpg" width="100%" class="d-inline-block align-top article-img" alt="">
+							<img src=<?php
+							if(file_exists("../media/article".$article1['id'].".jpg")==false) {
+							    echo("../noimage.jpg");
+							}
+							else {
+							    echo("../media/article".$article1['id'].".jpg");
+							}
+							?> width="100%" class="d-inline-block align-top article-img" alt="">
 						</div>
 						<div class="col-8">
 							<h2 class="article-heading">
@@ -96,7 +129,14 @@ $article3 = getfromdb($db, $dblenght - 2);
   				<div class="container">
   					<div class="row">
   						<div class="col-4">
-  							<img src="test.jpg" width="100%" class="d-inline-block align-top article-img" alt="">
+  							<img src=<?php
+							if(file_exists("../media/article".$article2['id'].".jpg")==false) {
+							    echo("../noimage.jpg");
+							}
+							else {
+							    echo("../media/article".$article2['id'].".jpg");
+							}
+							?> width="100%" class="d-inline-block align-top article-img" alt="">
   						</div>
   						<div class="col-8">
   							<h2 class="article-heading">
@@ -115,11 +155,23 @@ $article3 = getfromdb($db, $dblenght - 2);
   							</p>
   							<a class="btn btn-primary article-btn" href=<?php echo("/article?id=".$dblenght); ?>>Читать далее</a>
   						</div>
-              </div>
+                        </div>
   					</div>
   				</div>
   			</div>
+  			<div class="pages">
+	            <?php
+	            //количество статей
+	            $articles = countdb($db); 
+	            //количество страниц
+	            $pages = $articles / 2;
+	            for($i; $i <= $pages; $i++) {
+	                echo($i);
+	            }
+	            ?>
+	        </div>
 		</div>
+	</div>
 	<br>
 	<br>
 	<br>
