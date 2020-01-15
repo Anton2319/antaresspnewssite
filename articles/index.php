@@ -54,6 +54,7 @@ else {
             webvisor:true
        });
     </script>
+    <script data-ad-client="ca-pub-6494120359176396" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -118,7 +119,7 @@ else {
             					}
             					?>
 							</p>
-							<a class="btn btn-primary article-btn" href=<?php echo("/article?id=".$dblenght); ?>>Читать далее</a>
+							<a class="btn btn-primary article-btn" href=<?php echo("/article?id=".$article1['id']); ?>>Читать далее</a>
 						</div>
                     </div>
 				</div>
@@ -153,20 +154,22 @@ else {
             					}
             					?>
   							</p>
-  							<a class="btn btn-primary article-btn" href=<?php echo("/article?id=".$dblenght); ?>>Читать далее</a>
+  							<a class="btn btn-primary article-btn" href=<?php echo("/article?id=".$article2['id']); ?>>Читать далее</a>
   						</div>
                         </div>
   					</div>
   				</div>
   			</div>
   			<div class="pages">
+  			    <p class='pages-text text-white'>Страницы:</p>
 	            <?php
 	            //количество статей
 	            $articles = countdb($db); 
 	            //количество страниц
 	            $pages = $articles / 2;
-	            for($i; $i <= $pages; $i++) {
-	                echo($i);
+	            $pages = (int) $pages;
+	            for($i = $pages; $i > 0; $i--) {
+	                echo("<a href = '?page=".$i."' class='pages-link text-white'>".$i."      </a>");
 	            }
 	            ?>
 	        </div>

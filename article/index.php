@@ -35,6 +35,7 @@ $article = getfromdb($id, $db);
             webvisor:true
        });
     </script>
+    <script data-ad-client="ca-pub-6494120359176396" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -106,7 +107,6 @@ $article = getfromdb($id, $db);
 							</p>
 						</div>
 						<div class="col-4">
-							<h2 class="advtext">Тут могла быть ваша реклама</h2>
 						</div>
 					</div>
 				</div>
@@ -114,6 +114,28 @@ $article = getfromdb($id, $db);
 			<div class="comments">
 			    <div class="container">
     			    <div class="row">
+    			        <br>
+    			        <!-- Yandex.RTB R-A-488847-1 -->
+                        <div id="yandex_rtb_R-A-488847-1"></div>
+                        <script type="text/javascript">
+                            (function(w, d, n, s, t) {
+                                w[n] = w[n] || [];
+                                w[n].push(function() {
+                                    Ya.Context.AdvManager.render({
+                                        blockId: "R-A-488847-1",
+                                        renderTo: "yandex_rtb_R-A-488847-1",
+                                        async: true
+                                    });
+                                });
+                                t = d.getElementsByTagName("script")[0];
+                                s = d.createElement("script");
+                                s.type = "text/javascript";
+                                s.src = "//an.yandex.ru/system/context.js";
+                                s.async = true;
+                                t.parentNode.insertBefore(s, t);
+                            })(this, this.document, "yandexContextAsyncCallbacks");
+                        </script>
+                        <br>
     			        <div class="col">
     			            <h3 class="text-light comments-header">Комментарии:</h3>
     			            <h5 class="text-light comments-header"><b>Напишите комментарий:</b></h5>

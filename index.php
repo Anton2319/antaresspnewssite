@@ -43,7 +43,7 @@ $type = $_SESSION['Type'];
             webvisor:true
        });
     </script>
-    
+    <script data-ad-client="ca-pub-6494120359176396" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <noscript><div><img src="https://mc.yandex.ru/watch/56374378" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -64,6 +64,7 @@ $type = $_SESSION['Type'];
 		background-image: url("bg.png") ;
 		background-position: center center;
 		background-attachment: fixed;
+		background-size: cover;
 	}
 	</style>
 </head>
@@ -170,7 +171,7 @@ $type = $_SESSION['Type'];
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-4">
+			<div class="col-sm">
 				<div class="article-1">
 					<img src=<?php
 							if(file_exists("media/article".$article1['id'].".jpg")==false) {
@@ -197,7 +198,7 @@ $type = $_SESSION['Type'];
 					<a class="btn btn-primary article-btn" href=<?php echo("article/?id=".$article1['id']);?>>Читать далее</a>
 				</div>
 			</div>
-			<div class="col-4">
+			<div class="col-sm">
 				<div class="article-2">
 					<img src=<?php
 							if(file_exists("media/article".$article2['id'].".jpg")==false) {
@@ -224,7 +225,7 @@ $type = $_SESSION['Type'];
 					<a class="btn btn-primary article-btn" href=<?php echo("article/?id=".$article2['id']);?>>Читать далее</a>
 				</div>
 			</div>
-			<div class="col-4">
+			<div class="col-sm">
 				<div class="article-3">
 					<img src=<?php
 							if(file_exists("media/article".$article3['id'].".jpg")==false) {

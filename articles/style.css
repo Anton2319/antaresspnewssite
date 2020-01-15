@@ -41,3 +41,20 @@
 	background-color: rgba(0, 0, 0, 0.9);
 	margin-top: 6em;
 }
+.pages {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.9);
+	margin-top: 6em;
+}
+.pages > p {
+    display: inline-block;
+	color: white;
+	margin-top: 1em;
+	margin-left: 0.5em;
+}
+.pages > a {
+    display: inline-block;
+	color: white;
+	margin-top: 1em;
+	margin-left: 0.5em;
+}
